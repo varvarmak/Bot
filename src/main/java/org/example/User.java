@@ -13,6 +13,13 @@ public class User {
         this.years = new Year[TOTAL_YEARS];
     }
 
+    // возвращает год если он уже создан иначе ноль
+    public Year getExistingYear(int yearNumber) {
+        int index = yearNumber - START_YEAR;
+        if (index < 0 || index >= TOTAL_YEARS) return null;
+        return years[index];
+    }
+
     public Year getYear(int yearNumber) {
         int index = yearNumber - START_YEAR;
 

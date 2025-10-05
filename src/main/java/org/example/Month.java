@@ -41,6 +41,11 @@ public class Month {
         day.addEvent(time, title, comm);
     }
 
+    // возвращает денб если он уже есть иначе ноль
+    public Day getExistingDay(int dayNumber) {
+        return days.get(dayNumber);
+    }
+
     public int getTotalEvents() {
         int total = 0;
         for (Day d : days.values()) {

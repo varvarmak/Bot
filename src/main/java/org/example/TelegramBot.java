@@ -15,6 +15,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.Duration;
 
 public class TelegramBot {
 
@@ -26,13 +28,29 @@ public class TelegramBot {
     private String botToken;
     private int lastUpdateId = 0;
     private ObjectMapper objectMapper = new ObjectMapper();
-
+    private int reminderMinutes = 1;
     public TelegramBot(String botToken) {
         this.botToken = botToken;
     }
 
     public void start() {
         System.out.println("✅ Бот запущен! Токен: " + botToken.substring(0, 10) + "...");
+
+        // поток раз в 30 секунд проверяет напоминания
+        new Thread(() -> {
+            while (true) {
+                try {
+                    checkReminders();
+                    Thread.sleep(30_000);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    break;
+                } catch (Exception ex) {
+                    System.out.println("Ошибка в checkReminders: " + ex.getMessage());
+                }
+            }
+        }, "ReminderThread").start();
+
 
         while (true) {
             try {
@@ -510,6 +528,63 @@ public class TelegramBot {
         userStates.put(chatId, "MAIN_MENU");
         showMainMenu(chatId);
     }
+
+    private void checkReminders() {
+        LocalDateTime now = LocalDateTime.now();
+        int currentYear = now.getYear();
+
+        for (Map.Entry<Long, User> entry : users.entrySet()) {
+            Long chatId = entry.getKey();
+            User user = entry.getValue();
+
+
+            for (int year = currentYear - 1; year <= currentYear + 1; year++) {
+                Year yearObj = user.getExistingYear(year);
+                if (yearObj == null) continue;
+
+                for (int month = 1; month <= 12; month++) {
+                    Month monthObj = yearObj.getExistingMonth(month);
+                    if (monthObj == null) continue;
+
+                    int maxDay = monthObj.getDaysInMonth();
+                    for (int day = 1; day <= maxDay; day++) {
+                        Day dayObj = monthObj.getExistingDay(day);
+                        if (dayObj == null) continue;
+
+                        for (Event e : dayObj.getEvents()) {
+                            if (e == null) continue;
+                            if (e.isReminded()) continue; // уже напоминали
+
+                            try {
+                                String[] parts = e.getTime().split(":");
+                                int hour = Integer.parseInt(parts[0]);
+                                int minute = Integer.parseInt(parts[1]);
+
+                                LocalDateTime eventTime = LocalDateTime.of(year, month, day, hour, minute);
+                                long minutesUntil = Duration.between(now, eventTime).toMinutes();
+
+
+                                if (minutesUntil <= reminderMinutes && minutesUntil >= 0) {
+                                    String text = "⏰ Напоминание!\n" +
+                                            "Скоро: " + e.getTitle() + "\n" +
+                                            "🕒 В " + e.getTime() + "\n" +
+                                            "📅 " + day + "." + month + "." + year;
+                                    sendTelegramMessage(chatId, text);
+
+
+                                    e.setReminded(true);
+                                }
+                            } catch (Exception ex) {
+                               //иск ошиюкти времени
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 }
 
 class EventData {
