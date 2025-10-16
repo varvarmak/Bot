@@ -34,9 +34,10 @@ public class Year {
         Month month = getMonth(monthNumber);
         month.addEvent(dayNumber, time, title, description);
     }
-}
-// возвращает месяц, если он уже создан иначе ноль
-public Month getExistingMonth(int monthNumber) {
-    if (monthNumber < 1 || monthNumber > 12) return null;
-    return months[monthNumber];
+
+
+    public Month getExistingMonth(int monthNumber) {
+        if (monthNumber < 1 || monthNumber > 12) return null;
+        return months[monthNumber];
+    }
 }
