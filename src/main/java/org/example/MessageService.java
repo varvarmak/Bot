@@ -1,6 +1,12 @@
 package org.example;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MessageService {
     private TelegramBot bot;
 
@@ -17,6 +23,71 @@ public class MessageService {
             bot.execute(message);
         } catch (TelegramApiException e) {
             System.out.println("Ошибка отправки сообщения: " + e.getMessage());
+        }
+    }
+
+    public void sendMonthButtons(Long chatId) {
+        String[] months = {
+                "Январь","Февраль","Март","Апрель","Май","Июнь",
+                "Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"
+        };
+
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+
+        for (int i = 0; i < months.length; i += 3) {
+            List<InlineKeyboardButton> row = new ArrayList<>();
+            for (int j = i; j < i + 3 && j < months.length; j++) {
+                InlineKeyboardButton button = new InlineKeyboardButton();
+                button.setText(months[j]);
+                button.setCallbackData(months[j]);
+                row.add(button);
+            }
+            rows.add(row);
+        }
+
+        markup.setKeyboard(rows);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText("Выберите месяц:");
+        message.setReplyMarkup(markup);
+
+        try {
+            bot.execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendDayButtons(Long chatId, int year, int month) {
+        int daysInMonth = new Month(month).getDaysInMonth();
+
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+
+        for (int i = 1; i <= daysInMonth; i += 7) {
+            List<InlineKeyboardButton> row = new ArrayList<>();
+            for (int j = i; j < i + 7 && j <= daysInMonth; j++) {
+                InlineKeyboardButton button = new InlineKeyboardButton();
+                button.setText(String.valueOf(j));
+                button.setCallbackData(String.valueOf(j));
+                row.add(button);
+            }
+            rows.add(row);
+        }
+
+        markup.setKeyboard(rows);
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText("Выберите день:");
+        message.setReplyMarkup(markup);
+
+        try {
+            bot.execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 

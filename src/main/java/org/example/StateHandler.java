@@ -49,7 +49,7 @@ public class StateHandler {
             }
             stateManager.getTempEventData(chatId).year = year;
             stateManager.setUserState(chatId, "ADD_EVENT_MONTH");
-            messageService.sendMessage(chatId, "Введите месяц (1-12):");
+            messageService.sendMonthButtons(chatId); //кнопка месяц
         } catch (NumberFormatException e) {
             messageService.sendMessage(chatId, "Введите корректный год:");
         }
@@ -59,15 +59,19 @@ public class StateHandler {
         try {
             int month = Integer.parseInt(message);
             if (month < 1 || month > 12) {
-                messageService.sendMessage(chatId, "Месяц должен быть 1-12:"); return;
+                messageService.sendMessage(chatId, "Месяц должен быть 1-12:");
+                messageService.sendMonthButtons(chatId);
+                return;
             }
             stateManager.getTempEventData(chatId).month = month;
             stateManager.setUserState(chatId, "ADD_EVENT_DAY");
-            messageService.sendMessage(chatId, "Введите день:");
+            messageService.sendDayButtons(chatId, stateManager.getTempEventData(chatId).year, month);
         } catch (NumberFormatException e) {
             messageService.sendMessage(chatId, "Введите корректный месяц:");
+            messageService.sendMonthButtons(chatId);
         }
     }
+
 
     private void handleAddEventDay(Long chatId, String message) {
         try {
@@ -77,6 +81,7 @@ public class StateHandler {
             messageService.sendMessage(chatId, "Введите время:");
         } catch (NumberFormatException e) {
             messageService.sendMessage(chatId, "Введите корректный день:");
+            messageService.sendDayButtons(chatId, stateManager.getTempEventData(chatId).year, stateManager.getTempEventData(chatId).month);
         }
     }
 
@@ -97,11 +102,16 @@ public class StateHandler {
         try {
             user.getYear(data.year).addEvent(data.month, data.day, data.time, data.title, message);
             messageService.sendMessage(chatId, "✅ Дело добавлено!");
+            // Очищаем временные данные
+            stateManager.clearTempEventData(chatId);
+            // Сбрасываем состояние на главное меню
+            stateManager.setUserState(chatId, "MAIN_MENU");
         } catch (Exception e) {
             messageService.sendMessage(chatId, "❌ Ошибка: " + e.getMessage());
         }
         messageService.sendMainMenu(chatId, user);
     }
+
 
     private void handleViewEventsYear(Long chatId, String message) {
         try {
