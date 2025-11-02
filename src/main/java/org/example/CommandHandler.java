@@ -12,6 +12,7 @@ public class CommandHandler {
     }
 
     public void handleCommand(Long chatId, String command) {
+        User user = userManager.getUserByChatId(chatId);
         switch (command) {
             case "/start":
                 messageService.sendMainMenu(chatId, userManager.getUserByChatId(chatId));
@@ -25,10 +26,10 @@ public class CommandHandler {
                 messageService.sendMessage(chatId, "🔄 Введите имя пользователя:");
                 break;
             case "/stats":
-                messageService.sendStatistics(chatId, userManager.getUserByChatId(chatId));
+                messageService.sendStatistics(chatId, user);
                 break;
-            case "/help":
-                messageService.sendHelpMessage(chatId);
+            case "/horoscope":
+                messageService.sendZodiacButtons(chatId);
                 break;
             default:
                 messageService.sendMessage(chatId, "❌ Неизвестная команда. Используйте /help");

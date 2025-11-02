@@ -76,6 +76,12 @@ public class TelegramBot extends TelegramLongPollingBot {
         Long chatId = callbackQuery.getMessage().getChatId();
         String data = callbackQuery.getData(); // данные с кнопки
         String state = stateManager.getUserState(chatId);
+        // обработка кнопок гороскопа
+        if (data.startsWith("horoscope_")) {
+            String zodiacSign = data.substring("horoscope_".length());
+            messageService.sendHoroscope(chatId, zodiacSign);
+            return;
+        }
 
         EventData tempData = stateManager.getTempEventData(chatId);
 
