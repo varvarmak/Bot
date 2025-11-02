@@ -34,13 +34,13 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        // --- обработка нажатий на кнопки ---
+
         if (update.hasCallbackQuery()) {
             handleCallbackQuery(update.getCallbackQuery());
             return;
         }
 
-        // --- обработка обычных сообщений ---
+
         if (!update.hasMessage() || !update.getMessage().hasText()) {
             return;
         }
@@ -49,7 +49,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         String text = update.getMessage().getText().trim();
         String userName = UserNameExtractor.extractUserName(update.getMessage().getFrom());
 
-        // инициализация нового пользователя
+
         if (!userManager.userExists(chatId)) {
             User newUser = userManager.createUser(chatId, userName);
             stateManager.initializeUser(chatId);
@@ -61,13 +61,13 @@ public class TelegramBot extends TelegramLongPollingBot {
             return;
         }
 
-        // обработка команд
+
         if (text.startsWith("/")) {
             commandHandler.handleCommand(chatId, text);
             return;
         }
 
-        // обработка сообщений по состояниям
+
         String state = stateManager.getUserState(chatId);
         stateHandler.handleState(chatId, state, text);
     }
@@ -81,7 +81,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         switch (state) {
             case "ADD_EVENT_MONTH":
-                // Найти номер месяца по названию
+
                 int monthNumber = convertMonthNameToNumber(data);
                 if (monthNumber != -1) {
                     tempData.month = monthNumber;

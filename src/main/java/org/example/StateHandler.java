@@ -49,7 +49,7 @@ public class StateHandler {
             }
             stateManager.getTempEventData(chatId).year = year;
             stateManager.setUserState(chatId, "ADD_EVENT_MONTH");
-            messageService.sendMonthButtons(chatId); //кнопка месяц
+            messageService.sendMonthButtons(chatId);
         } catch (NumberFormatException e) {
             messageService.sendMessage(chatId, "Введите корректный год:");
         }
@@ -102,9 +102,9 @@ public class StateHandler {
         try {
             user.getYear(data.year).addEvent(data.month, data.day, data.time, data.title, message);
             messageService.sendMessage(chatId, "✅ Дело добавлено!");
-            // Очищаем временные данные
+
             stateManager.clearTempEventData(chatId);
-            // Сбрасываем состояние на главное меню
+
             stateManager.setUserState(chatId, "MAIN_MENU");
         } catch (Exception e) {
             messageService.sendMessage(chatId, "❌ Ошибка: " + e.getMessage());

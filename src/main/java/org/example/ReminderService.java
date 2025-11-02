@@ -19,7 +19,7 @@ public class ReminderService {
             while (running) {
                 try {
                     checkReminders();
-                    Thread.sleep(30000); // 30 секунд
+                    Thread.sleep(30000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     break;
@@ -39,14 +39,14 @@ public class ReminderService {
     private void checkReminders() {
         LocalDateTime now = LocalDateTime.now();
 
-        // Проходим по всем пользователям
+
         for (User user : userManager.getAllUsers()) {
             checkUserReminders(user, now);
         }
     }
 
     private void checkUserReminders(User user, LocalDateTime now) {
-        // Проверяем события на сегодня и завтра
+
         LocalDateTime tomorrow = now.plusDays(1);
 
         checkDayReminders(user, now.getYear(), now.getMonthValue(), now.getDayOfMonth(), now);
@@ -64,7 +64,7 @@ public class ReminderService {
             Day dayObj = monthObj.getExistingDay(day);
             if (dayObj == null) return;
 
-            // Проверяем все события этого дня
+
             for (Event event : dayObj.getEvents()) {
                 if (event != null && !event.isReminded()) {
                     checkEventReminder(user, event, year, month, day, now);
@@ -77,19 +77,19 @@ public class ReminderService {
 
     private void checkEventReminder(User user, Event event, int year, int month, int day, LocalDateTime now) {
         try {
-            // Парсим время события
+
             String[] timeParts = event.getTime().split(":");
             int eventHour = Integer.parseInt(timeParts[0]);
             int eventMinute = Integer.parseInt(timeParts[1]);
 
             LocalDateTime eventTime = LocalDateTime.of(year, month, day, eventHour, eventMinute);
 
-            // Проверяем, наступает ли событие в течение reminderMinutes
+
             Duration timeUntilEvent = Duration.between(now, eventTime);
             long minutesUntilEvent = timeUntilEvent.toMinutes();
 
             if (minutesUntilEvent <= reminderMinutes && minutesUntilEvent >= 0) {
-                // Отправляем напоминание
+
                 sendReminder(user, event, eventTime);
                 event.setReminded(true);
             }
@@ -99,7 +99,7 @@ public class ReminderService {
     }
 
     private void sendReminder(User user, Event event, LocalDateTime eventTime) {
-        // Находим chatId для этого пользователя
+
         Long chatId = userManager.getChatIdByUser(user);
         if (chatId != null) {
             String reminderText = "⏰ НАПОМИНАНИЕ!\n" +
@@ -108,7 +108,7 @@ public class ReminderService {
                     "Дата: " + eventTime.getDayOfMonth() + "." + eventTime.getMonthValue() + "." + eventTime.getYear() + "\n" +
                     "Описание: " + event.getComm();
 
-            // Используем MessageService для отправки
+
             MessageService messageService = new MessageService(bot);
             messageService.sendMessage(chatId, reminderText);
         }
