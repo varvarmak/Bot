@@ -4,6 +4,12 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
+
+
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+
 public class TelegramBot extends TelegramLongPollingBot {
     private String botToken;
     private String botUsername;
@@ -40,7 +46,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             return;
         }
 
-
         if (!update.hasMessage() || !update.getMessage().hasText()) {
             return;
         }
@@ -48,7 +53,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         long chatId = update.getMessage().getChatId();
         String text = update.getMessage().getText().trim();
         String userName = UserNameExtractor.extractUserName(update.getMessage().getFrom());
-
 
         if (!userManager.userExists(chatId)) {
             User newUser = userManager.createUser(chatId, userName);
@@ -61,12 +65,10 @@ public class TelegramBot extends TelegramLongPollingBot {
             return;
         }
 
-
         if (text.startsWith("/")) {
             commandHandler.handleCommand(chatId, text);
             return;
         }
-
 
         String state = stateManager.getUserState(chatId);
         stateHandler.handleState(chatId, state, text);
@@ -76,6 +78,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         Long chatId = callbackQuery.getMessage().getChatId();
         String data = callbackQuery.getData(); // данные с кнопки
         String state = stateManager.getUserState(chatId);
+
         // обработка кнопок гороскопа
         if (data.startsWith("horoscope_")) {
             String zodiacSign = data.substring("horoscope_".length());
@@ -87,7 +90,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         switch (state) {
             case "ADD_EVENT_MONTH":
-
                 int monthNumber = convertMonthNameToNumber(data);
                 if (monthNumber != -1) {
                     tempData.month = monthNumber;
@@ -109,6 +111,14 @@ public class TelegramBot extends TelegramLongPollingBot {
                     messageService.sendMessage(chatId, "❌ Некорректный день. Попробуйте снова.");
                     messageService.sendDayButtons(chatId, tempData.year, tempData.month);
                 }
+                break;
+
+            default:
+                // Если состояние не обрабатывается, сбрасываем в главное меню
+                User user = userManager.getUserByChatId(chatId);
+                stateManager.setUserState(chatId, "MAIN_MENU");
+                stateManager.clearTempEventData(chatId);
+                messageService.sendMainMenu(chatId, user);
                 break;
         }
     }

@@ -33,7 +33,6 @@ public class MessageService {
         sendMessage(chatId, stats);
     }
 
-
     public void sendMonthButtons(Long chatId) {
         String[] months = {
                 "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
@@ -161,13 +160,14 @@ public class MessageService {
                 "2. 👀 Посмотреть дела\n" +
                 "3. 📊 Моя статистика\n" +
                 "4. 🔄 Сменить пользователя\n" +
-                "5. ♈ Получить гороскоп\n" +  // ← ДОБАВЛЕНО
+                "5. ♈ Получить гороскоп\n" +
                 "6. ℹ️ Помощь\n\n" +
                 "Команды:\n" +
                 "/name - изменить имя\n" +
                 "/switch - сменить пользователя\n" +
                 "/stats - статистика\n" +
-                "/horoscope - гороскоп на сегодня\n" +  // ← ДОБАВЛЕНО
+                "/horoscope - гороскоп на сегодня\n" +
+                "/cancel - отменить текущую операцию\n" +
                 "/help - помощь\n\n" +
                 "Выберите действие:";
         sendMessage(chatId, menu);

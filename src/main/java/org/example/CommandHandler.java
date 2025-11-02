@@ -15,6 +15,9 @@ public class CommandHandler {
         User user = userManager.getUserByChatId(chatId);
         switch (command) {
             case "/start":
+                // Полностью сбрасываем состояние пользователя
+                stateManager.setUserState(chatId, "MAIN_MENU");
+                stateManager.clearTempEventData(chatId);
                 messageService.sendMainMenu(chatId, userManager.getUserByChatId(chatId));
                 break;
             case "/name":
@@ -30,6 +33,12 @@ public class CommandHandler {
                 break;
             case "/horoscope":
                 messageService.sendZodiacButtons(chatId);
+                break;
+            case "/cancel":
+                stateManager.setUserState(chatId, "MAIN_MENU");
+                stateManager.clearTempEventData(chatId);
+                messageService.sendMessage(chatId, "❌ Операция отменена");
+                messageService.sendMainMenu(chatId, userManager.getUserByChatId(chatId));
                 break;
             default:
                 messageService.sendMessage(chatId, "❌ Неизвестная команда. Используйте /help");

@@ -1,5 +1,6 @@
 package org.example;
 
+
 public class StateHandler {
     private UserManager userManager;
     private UserStateManager stateManager;
@@ -32,12 +33,26 @@ public class StateHandler {
 
     private void handleMainMenu(Long chatId, String message, User user) {
         switch (message) {
-            case "1": stateManager.setUserState(chatId, "ADD_EVENT_YEAR"); messageService.sendMessage(chatId, "Введите год (2025-2125):"); break;
-            case "2": stateManager.setUserState(chatId, "VIEW_EVENTS_YEAR"); messageService.sendMessage(chatId, "Введите год:"); break;
-            case "3": messageService.sendStatistics(chatId, user); break;
-            case "4": stateManager.setUserState(chatId, "SWITCH_USER"); messageService.sendMessage(chatId, "Введите имя пользователя:"); break;
-            case "5": messageService.sendZodiacButtons(chatId); break;
-            default: messageService.sendMainMenu(chatId, user);
+            case "1":
+                stateManager.setUserState(chatId, "ADD_EVENT_YEAR");
+                messageService.sendMessage(chatId, "Введите год (2025-2125):");
+                break;
+            case "2":
+                stateManager.setUserState(chatId, "VIEW_EVENTS_YEAR");
+                messageService.sendMessage(chatId, "Введите год:");
+                break;
+            case "3":
+                messageService.sendStatistics(chatId, user);
+                break;
+            case "4":
+                stateManager.setUserState(chatId, "SWITCH_USER");
+                messageService.sendMessage(chatId, "Введите имя пользователя:");
+                break;
+            case "5":
+                messageService.sendZodiacButtons(chatId);
+                break;
+            default:
+                messageService.sendMainMenu(chatId, user);
         }
     }
 
@@ -45,7 +60,8 @@ public class StateHandler {
         try {
             int year = Integer.parseInt(message);
             if (year < 2025 || year > 2125) {
-                messageService.sendMessage(chatId, "Год должен быть 2025-2125:"); return;
+                messageService.sendMessage(chatId, "Год должен быть 2025-2125:");
+                return;
             }
             stateManager.getTempEventData(chatId).year = year;
             stateManager.setUserState(chatId, "ADD_EVENT_MONTH");
@@ -71,7 +87,6 @@ public class StateHandler {
             messageService.sendMonthButtons(chatId);
         }
     }
-
 
     private void handleAddEventDay(Long chatId, String message) {
         try {
@@ -103,15 +118,18 @@ public class StateHandler {
             user.getYear(data.year).addEvent(data.month, data.day, data.time, data.title, message);
             messageService.sendMessage(chatId, "✅ Дело добавлено!");
 
+            // Очищаем временные данные
             stateManager.clearTempEventData(chatId);
-
+            // Сбрасываем состояние
             stateManager.setUserState(chatId, "MAIN_MENU");
+
+            // Отправляем главное меню только один раз
+            messageService.sendMainMenu(chatId, user);
         } catch (Exception e) {
             messageService.sendMessage(chatId, "❌ Ошибка: " + e.getMessage());
+            messageService.sendMainMenu(chatId, user);
         }
-        messageService.sendMainMenu(chatId, user);
     }
-
 
     private void handleViewEventsYear(Long chatId, String message) {
         try {
@@ -153,6 +171,10 @@ public class StateHandler {
         } catch (Exception e) {
             messageService.sendMessage(chatId, "❌ Ошибка: " + e.getMessage());
         }
+
+        // Очищаем временные данные и сбрасываем состояние
+        stateManager.clearTempEventData(chatId);
+        stateManager.setUserState(chatId, "MAIN_MENU");
         messageService.sendMainMenu(chatId, user);
     }
 
@@ -164,6 +186,7 @@ public class StateHandler {
             user.setName(newName);
             messageService.sendMessage(chatId, "✅ Имя изменено");
         }
+        stateManager.setUserState(chatId, "MAIN_MENU");
         messageService.sendMainMenu(chatId, user);
     }
 
@@ -182,11 +205,9 @@ public class StateHandler {
             return;
         }
 
-
         userManager.switchUser(chatId, targetUser);
-
-
         stateManager.setUserState(chatId, "MAIN_MENU");
+        stateManager.clearTempEventData(chatId);
 
         messageService.sendMessage(chatId, "✅ Переключен на пользователя: " + targetUser.getName());
         messageService.sendMainMenu(chatId, targetUser);
