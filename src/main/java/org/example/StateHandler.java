@@ -36,7 +36,7 @@ public class StateHandler {
             case "2": stateManager.setUserState(chatId, "VIEW_EVENTS_YEAR"); messageService.sendMessage(chatId, "Введите год:"); break;
             case "3": messageService.sendStatistics(chatId, user); break;
             case "4": stateManager.setUserState(chatId, "SWITCH_USER"); messageService.sendMessage(chatId, "Введите имя пользователя:"); break;
-            case "5": messageService.sendHelpMessage(chatId); break;
+            case "5": messageService.sendZodiacButtons(chatId); break;
             default: messageService.sendMainMenu(chatId, user);
         }
     }
