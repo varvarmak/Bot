@@ -3,6 +3,7 @@ package org.example.bot.handlers;
 import org.example.services.UserManager;
 import org.example.services.UserStateManager;
 import org.example.services.MessageService;
+import org.example.services.UserData;
 
 public class StateHandler {
     private UserManager userManager;
@@ -65,49 +66,56 @@ public class StateHandler {
 
     private void handleMainMenu(Long chatId, String message, org.example.models.User user) {
         switch (message) {
-            case "1":
+            case "📅 Добавить дело":
                 stateManager.setUserState(chatId, "ADD_EVENT_YEAR");
                 messageSender.sendSimpleMessage(chatId, "Введите год (2025-2125):");
                 break;
-            case "2":
+            case "👀 Посмотреть дела":
                 stateManager.setUserState(chatId, "VIEW_EVENTS_YEAR");
                 messageSender.sendSimpleMessage(chatId, "Введите год для просмотра событий:");
                 break;
-            case "3":
+            case "📊 Моя статистика":
                 messageService.sendStatistics(chatId, user);
-                stateManager.setUserState(chatId, "MAIN_MENU");
+                // Остаемся в MAIN_MENU
                 break;
-            case "4":
+            case "📋 История напоминаний":
+                messageService.executeHistoryCommand(chatId);
+                // Остаемся в MAIN_MENU
+                break;
+            case "🔄 Сменить пользователя":
                 stateManager.setUserState(chatId, "SWITCH_USER");
                 String usersList = userManager.getAvailableUsersList();
                 messageSender.sendSimpleMessage(chatId, "Доступные пользователи:\n" + usersList + "\nВведите имя пользователя:");
                 break;
-            case "5":
+            case "♈ Гороскоп":
                 messageService.sendZodiacButtons(chatId);
-                stateManager.setUserState(chatId, "MAIN_MENU");
+                // Остаемся в MAIN_MENU
                 break;
-            case "6":
-                sendHelpMessage(chatId);
-                stateManager.setUserState(chatId, "MAIN_MENU");
+            case "ℹ️ Помощь":
+                messageService.sendHelpMessage(chatId, user);
+                // Остаемся в MAIN_MENU
                 break;
             default:
+                // Если пришло неизвестное сообщение, показываем главное меню
                 messageService.sendMainMenu(chatId, user);
         }
     }
 
     private void sendHelpMessage(Long chatId) {
         String helpText = "ℹ️ Помощь по боту:\n\n" +
-                "1. 📅 Добавить дело - создайте новое событие с указанием даты и времени\n" +
-                "2. 👀 Посмотреть дела - просмотр событий на определенный день\n" +
-                "3. 📊 Моя статистика - общее количество дел\n" +
-                "4. 🔄 Сменить пользователя - переключиться на другого пользователя\n" +
-                "5. ♈ Получить гороскоп - гороскоп на сегодня\n" +
-                "6. ℹ️ Помощь - это сообщение\n\n" +
+                "📅 Добавить дело - создайте новое событие с указанием даты и времени\n" +
+                "👀 Посмотреть дела - просмотр событий на определенный день\n" +
+                "📊 Моя статистика - общее количество дел\n" +
+                "📋 История напоминаний - просмотр последних сохраненных напоминаний\n" +
+                "🔄 Сменить пользователя - переключиться на другого пользователя\n" +
+                "♈ Гороскоп - гороскоп на сегодня\n" +
+                "ℹ️ Помощь - это сообщение\n\n" +
                 "Команды:\n" +
                 "/start - начать работу\n" +
                 "/name - изменить имя\n" +
                 "/stats - статистика\n" +
                 "/horoscope - гороскоп\n" +
+                "/history - история напоминаний\n" +
                 "/cancel - отмена операции";
 
         messageSender.sendSimpleMessage(chatId, helpText);
@@ -175,7 +183,20 @@ public class StateHandler {
     private void handleAddEventDescription(Long chatId, String message, org.example.models.User user) {
         org.example.models.EventData data = stateManager.getTempEventData(chatId);
         try {
+            // Добавляем событие в память
             user.getYear(data.year).addEvent(data.month, data.day, data.time, data.title, message);
+
+            // Сохраняем в базу данных
+            UserData userData = new UserData();
+            userData.setYear(data.year);
+            userData.setMonth(String.valueOf(data.month)); // Сохраняем номер месяца как строку
+            userData.setDay(data.day);
+            userData.setReminderTime(data.time);
+            userData.setReminderName(data.title);
+            userData.setDescription(message);
+
+            userManager.saveReminder(chatId, userData);
+
             messageSender.sendSimpleMessage(chatId, "✅ Дело добавлено!");
             stateManager.clearTempEventData(chatId);
             stateManager.setUserState(chatId, "MAIN_MENU");

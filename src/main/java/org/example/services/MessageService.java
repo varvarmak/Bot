@@ -5,7 +5,8 @@ import org.example.models.User;
 import org.example.utils.KeyboardFactory;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ import java.util.Map;
 
 public class MessageService {
     private TelegramBot bot;
+    private UserHistoryCommand historyCommand;
 
     public MessageService(TelegramBot bot) {
         this.bot = bot;
+        this.historyCommand = new UserHistoryCommand(bot);
     }
 
     public void sendMessage(Long chatId, String text) {
@@ -29,6 +32,32 @@ public class MessageService {
         } catch (TelegramApiException e) {
             System.out.println("Ошибка отправки сообщения: " + e.getMessage());
         }
+    }
+
+    // Этот метод теперь должен только отправлять меню, а не обрабатывать состояния
+    public void sendMainMenu(Long chatId, User user) {
+        String menu = "🎯 Главное меню\n" +
+                "👤 Текущий пользователь: " + user.getName() +
+                " (ID: " + user.getId() + ")\n" +
+                "📊 Дел: " + user.getTotalEvents() + "\n\n" +
+                "Выберите действие:";
+
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId.toString());
+        message.setText(menu);
+        message.setReplyMarkup(createMainMenuKeyboard());
+
+        try {
+            bot.execute(message);
+        } catch (TelegramApiException e) {
+            System.out.println("Ошибка отправки главного меню: " + e.getMessage());
+        }
+    }
+
+    // Удаляем handleTextMessage из MessageService - он должен быть в StateHandler
+
+    public void executeHistoryCommand(Long chatId) {
+        historyCommand.executeByChatId(chatId);
     }
 
     public void sendStatistics(Long chatId, User user) {
@@ -54,23 +83,7 @@ public class MessageService {
     }
 
     public void sendDayButtons(Long chatId, int year, int month) {
-        int daysInMonth = new org.example.models.Month(month).getDaysInMonth();
-
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-
-        for (int i = 1; i <= daysInMonth; i += 7) {
-            List<InlineKeyboardButton> row = new ArrayList<>();
-            for (int j = i; j < i + 7 && j <= daysInMonth; j++) {
-                InlineKeyboardButton button = new InlineKeyboardButton();
-                button.setText(String.valueOf(j));
-                button.setCallbackData(String.valueOf(j));
-                row.add(button);
-            }
-            rows.add(row);
-        }
-
-        markup.setKeyboard(rows);
+        InlineKeyboardMarkup markup = KeyboardFactory.createDayButtons(year, month);
 
         SendMessage message = new SendMessage();
         message.setChatId(chatId.toString());
@@ -111,25 +124,52 @@ public class MessageService {
         sendMessage(chatId, messageText);
     }
 
-    public void sendMainMenu(Long chatId, User user) {
-        String menu = "🎯 Главное меню\n" +
-                "👤 Текущий пользователь: " + user.getName() +
-                " (ID: " + user.getId() + ")\n" +
-                "📊 Дел: " + user.getTotalEvents() + "\n\n" +
-                "1. 📅 Добавить дело\n" +
-                "2. 👀 Посмотреть дела\n" +
-                "3. 📊 Моя статистика\n" +
-                "4. 🔄 Сменить пользователя\n" +
-                "5. ♈ Получить гороскоп\n" +
-                "6. ℹ️ Помощь\n\n" +
+    private ReplyKeyboardMarkup createMainMenuKeyboard() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow row1 = new KeyboardRow();
+        row1.add("📅 Добавить дело");
+        row1.add("👀 Посмотреть дела");
+
+        KeyboardRow row2 = new KeyboardRow();
+        row2.add("📊 Моя статистика");
+        row2.add("📋 История напоминаний");
+
+        KeyboardRow row3 = new KeyboardRow();
+        row3.add("🔄 Сменить пользователя");
+        row3.add("♈ Гороскоп");
+
+        KeyboardRow row4 = new KeyboardRow();
+        row4.add("ℹ️ Помощь");
+
+        keyboard.add(row1);
+        keyboard.add(row2);
+        keyboard.add(row3);
+        keyboard.add(row4);
+
+        keyboardMarkup.setKeyboard(keyboard);
+        keyboardMarkup.setResizeKeyboard(true);
+        return keyboardMarkup;
+    }
+
+    public void sendHelpMessage(Long chatId, User user) {
+        String helpText = "ℹ️ Помощь по боту:\n\n" +
+                "📅 Добавить дело - создайте новое событие с указанием даты и времени\n" +
+                "👀 Посмотреть дела - просмотр событий на определенный день\n" +
+                "📊 Моя статистика - общее количество дел\n" +
+                "📋 История напоминаний - просмотр последних сохраненных напоминаний\n" +
+                "🔄 Сменить пользователя - переключиться на другого пользователя\n" +
+                "♈ Гороскоп - гороскоп на сегодня\n" +
+                "ℹ️ Помощь - это сообщение\n\n" +
                 "Команды:\n" +
+                "/start - начать работу\n" +
                 "/name - изменить имя\n" +
-                "/switch - сменить пользователя\n" +
                 "/stats - статистика\n" +
-                "/horoscope - гороскоп на сегодня\n" +
-                "/cancel - отменить текущую операцию\n" +
-                "/help - помощь\n\n" +
-                "Выберите действие:";
-        sendMessage(chatId, menu);
+                "/horoscope - гороскоп\n" +
+                "/history - история напоминаний\n" +
+                "/cancel - отмена операции";
+
+        sendMessage(chatId, helpText);
     }
 }

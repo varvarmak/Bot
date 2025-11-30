@@ -59,6 +59,10 @@ public class CommandHandler {
             case "/horoscope":
                 messageService.sendZodiacButtons(chatId);
                 break;
+            case "/history":
+                // Вызываем историю напоминаний напрямую
+                messageService.executeHistoryCommand(chatId);
+                break;
             case "/cancel":
                 stateManager.setUserState(chatId, "MAIN_MENU");
                 stateManager.clearTempEventData(chatId);
@@ -88,6 +92,7 @@ public class CommandHandler {
                 "/switch - сменить пользователя\n" +
                 "/stats - статистика\n" +
                 "/horoscope - гороскоп на сегодня\n" +
+                "/history - история напоминаний\n" +
                 "/cancel - отменить текущую операцию\n" +
                 "/help - помощь\n\n" +
                 "Или используйте меню ниже:";

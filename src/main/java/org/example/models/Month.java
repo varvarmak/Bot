@@ -26,7 +26,6 @@ public class Month {
 
     public int getDaysInMonth() { return daysInMonth; }
 
-    public String getMonthName() { return MONTH_NAMES[monthNumber]; }
 
     public Day getDay(int dayNumber) {
         if (dayNumber < 1 || dayNumber > daysInMonth) {

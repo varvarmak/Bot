@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.DataBaseManager;
 import org.example.models.User;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,12 @@ import java.util.Collection;
 public class UserManager {
     private Map<Long, User> usersByChatId = new HashMap<>();
     private Map<String, User> usersByName = new HashMap<>();
+    private DataBaseManager databaseManager;
     private int nextUserId = 1;
+
+    public UserManager() {
+        this.databaseManager = new DataBaseManager();
+    }
 
     public User getUserByChatId(Long chatId) {
         return usersByChatId.get(chatId);
@@ -19,10 +25,17 @@ public class UserManager {
     }
 
     public User createUser(Long chatId, String userName) {
+        // Сохраняем пользователя в базе данных
+        databaseManager.saveUser(chatId);
+
         User newUser = new User(nextUserId++, userName);
         usersByChatId.put(chatId, newUser);
         usersByName.put(userName.toLowerCase(), newUser);
         return newUser;
+    }
+
+    public void saveReminder(Long userId, UserData userData) {
+        databaseManager.saveReminder(userId, userData);
     }
 
     public void switchUser(Long chatId, User user) {
