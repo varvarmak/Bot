@@ -1,0 +1,16 @@
+org\example\TelegramBot.class
+org\example\UserNameExtractor.class
+org\example\CommandHandler.class
+org\example\UserManager.class
+org\example\MessageService.class
+org\example\Month.class
+org\example\HoroscopeService.class
+org\example\ReminderService.class
+org\example\Day.class
+org\example\EventData.class
+org\example\Main.class
+org\example\StateHandler.class
+org\example\User.class
+org\example\UserStateManager.class
+org\example\Year.class
+org\example\Event.class
