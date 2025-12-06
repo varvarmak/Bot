@@ -110,6 +110,25 @@ public class MessageService {
 
         sendMessage(chatId, messageText);
     }
+    public void sendWeatherButtons(Long chatId) {
+        InlineKeyboardMarkup markup = KeyboardFactory.createWeatherKeyboard();
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId.toString());
+        message.setText("🌤️ Выберите город:");
+        message.setReplyMarkup(markup);
+        try {
+            bot.execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendWeather(Long chatId, String city) {
+        WeatherService weatherService = new WeatherService();
+        String weather = weatherService.getWeather(city);
+        sendMessage(chatId, weather);
+    }
+
 
     public void sendMainMenu(Long chatId, User user) {
         String menu = "🎯 Главное меню\n" +
@@ -121,15 +140,18 @@ public class MessageService {
                 "3. 📊 Моя статистика\n" +
                 "4. 🔄 Сменить пользователя\n" +
                 "5. ♈ Получить гороскоп\n" +
-                "6. ℹ️ Помощь\n\n" +
+                "6. 🌤️ Погода\n" +
+                "7. ℹ️ Помощь\n\n" +
                 "Команды:\n" +
                 "/name - изменить имя\n" +
                 "/switch - сменить пользователя\n" +
                 "/stats - статистика\n" +
                 "/horoscope - гороскоп на сегодня\n" +
+                "/weather - погода\n" +
                 "/cancel - отменить текущую операцию\n" +
                 "/help - помощь\n\n" +
                 "Выберите действие:";
         sendMessage(chatId, menu);
     }
+
 }

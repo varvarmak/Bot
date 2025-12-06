@@ -59,6 +59,9 @@ public class CommandHandler {
             case "/horoscope":
                 messageService.sendZodiacButtons(chatId);
                 break;
+            case "/weather":
+                messageService.sendWeatherButtons(chatId);
+                break;
             case "/cancel":
                 stateManager.setUserState(chatId, "MAIN_MENU");
                 stateManager.clearTempEventData(chatId);

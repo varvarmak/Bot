@@ -4,69 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32b974d9-7862-47ca-a041-1751045c4f3f" name="Changes" comment="мама мама мама">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_11_2025_18_42_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_11_2025_18_42__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/TelegramBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CallbackHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CommandHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/MessageSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/StateHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Day.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/EventData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Month.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Year.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/HoroscopeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/ReminderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/UserManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/UserStateManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/DateTimeUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/KeyboardFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/UserNameExtractor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/bot.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/bot/TelegramBot.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CallbackHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CommandHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/MessageSender.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/StateHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/models/Day.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/models/Event.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/models/EventData.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/models/Month.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/models/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/models/Year.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/services/HoroscopeService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/services/MessageService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/services/ReminderService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/services/UserManager.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/services/UserStateManager.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/utils/DateTimeUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/utils/KeyboardFactory.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/org/example/utils/UserNameExtractor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/simple-bot-1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.DayTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.EventTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.IntegrationScenarioTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.MonthTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.UserTest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.DayTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.EventTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.IntegrationScenarioTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.MonthTest.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.UserTest.txt" afterDir="false" />
+    <list default="true" id="32b974d9-7862-47ca-a041-1751045c4f3f" name="Changes" comment="вроде готово">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/WeatherService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/StateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/StateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/KeyboardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/KeyboardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CallbackHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CallbackHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CommandHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CommandHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/StateHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/StateHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/services/MessageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/services/MessageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/utils/KeyboardFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/utils/KeyboardFactory.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +68,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;4babaabf&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Varvara/Desktop/oop/Bot/src/main/java/org/example/Main.java&quot;,
@@ -190,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764427012657</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="вроде готово">
+      <option name="closed" value="true" />
+      <created>1764497386385</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1764497386385</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,6 +172,7 @@
     <MESSAGE value="за" />
     <MESSAGE value="все работает" />
     <MESSAGE value="мама мама мама" />
-    <option name="LAST_COMMIT_MESSAGE" value="мама мама мама" />
+    <MESSAGE value="вроде готово" />
+    <option name="LAST_COMMIT_MESSAGE" value="вроде готово" />
   </component>
 </project>

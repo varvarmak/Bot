@@ -1,5 +1,4 @@
 package org.example.models;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,7 +14,7 @@ public class Event {
         this.title = title;
         this.comm = comm;
         this.reminded = false;
-        this.eventDateTime = LocalDateTime.now(); // Можно улучшить для реального времени события
+        this.eventDateTime = LocalDateTime.now();
     }
 
     public Event(LocalDateTime eventDateTime, String title, String comm) {

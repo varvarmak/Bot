@@ -82,4 +82,25 @@ public class KeyboardFactory {
         markup.setKeyboard(rows);
         return markup;
     }
+    public static InlineKeyboardMarkup createWeatherKeyboard() {
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+
+        List<InlineKeyboardButton> row1 = new ArrayList<>();
+        InlineKeyboardButton btn1 = new InlineKeyboardButton();
+        btn1.setText("🌆 Екатеринбург");
+        btn1.setCallbackData("weather_ekaterinburg");
+
+        InlineKeyboardButton btn2 = new InlineKeyboardButton();
+        btn2.setText("🏙️ Москва");
+        btn2.setCallbackData("weather_moscow");
+
+        row1.add(btn1);
+        row1.add(btn2);
+        rows.add(row1);
+
+        markup.setKeyboard(rows);
+        return markup;
+    }
+
 }

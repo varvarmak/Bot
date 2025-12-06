@@ -30,8 +30,21 @@ public class CallbackHandler {
             return;
         }
 
-        org.example.models.EventData tempData = stateManager.getTempEventData(chatId);
 
+        if (data.startsWith("weather_")) {
+            String city = null;
+            if (data.equals("weather_ekaterinburg")) {
+                city = "Ekaterinburg";
+            } else if (data.equals("weather_moscow")) {
+                city = "Moscow";
+            }
+            if (city != null) {
+                messageService.sendWeather(chatId, city);
+            }
+            return;
+        }
+
+        org.example.models.EventData tempData = stateManager.getTempEventData(chatId);
         switch (state) {
             case "ADD_EVENT_MONTH":
                 int monthNumber = convertMonthNameToNumber(data);

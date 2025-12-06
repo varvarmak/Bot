@@ -69,31 +69,43 @@ public class StateHandler {
                 stateManager.setUserState(chatId, "ADD_EVENT_YEAR");
                 messageSender.sendSimpleMessage(chatId, "Введите год (2025-2125):");
                 break;
+
             case "2":
                 stateManager.setUserState(chatId, "VIEW_EVENTS_YEAR");
                 messageSender.sendSimpleMessage(chatId, "Введите год для просмотра событий:");
                 break;
+
             case "3":
                 messageService.sendStatistics(chatId, user);
                 stateManager.setUserState(chatId, "MAIN_MENU");
                 break;
+
             case "4":
                 stateManager.setUserState(chatId, "SWITCH_USER");
                 String usersList = userManager.getAvailableUsersList();
                 messageSender.sendSimpleMessage(chatId, "Доступные пользователи:\n" + usersList + "\nВведите имя пользователя:");
                 break;
+
             case "5":
                 messageService.sendZodiacButtons(chatId);
                 stateManager.setUserState(chatId, "MAIN_MENU");
                 break;
+
             case "6":
+                messageService.sendWeatherButtons(chatId);
+                stateManager.setUserState(chatId, "MAIN_MENU");
+                break;
+
+            case "7":
                 sendHelpMessage(chatId);
                 stateManager.setUserState(chatId, "MAIN_MENU");
                 break;
+
             default:
                 messageService.sendMainMenu(chatId, user);
         }
     }
+
 
     private void sendHelpMessage(Long chatId) {
         String helpText = "ℹ️ Помощь по боту:\n\n" +
