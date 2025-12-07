@@ -141,6 +141,7 @@ public class MessageService {
         row3.add("♈ Гороскоп");
 
         KeyboardRow row4 = new KeyboardRow();
+        row4.add("🌤️ Погода");
         row4.add("ℹ️ Помощь");
 
         keyboard.add(row1);
@@ -172,4 +173,23 @@ public class MessageService {
 
         sendMessage(chatId, helpText);
     }
+    public void sendWeatherButtons(Long chatId) {
+        InlineKeyboardMarkup markup = KeyboardFactory.createWeatherKeyboard();
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId.toString());
+        message.setText("🌤️ Выберите город:");
+        message.setReplyMarkup(markup);
+        try {
+            bot.execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendWeather(Long chatId, String city) {
+        WeatherService weatherService = new WeatherService();
+        String weather = weatherService.getWeather(city);
+        sendMessage(chatId, weather);
+    }
+
 }

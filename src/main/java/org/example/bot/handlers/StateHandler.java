@@ -76,11 +76,9 @@ public class StateHandler {
                 break;
             case "📊 Моя статистика":
                 messageService.sendStatistics(chatId, user);
-                // Остаемся в MAIN_MENU
                 break;
             case "📋 История напоминаний":
                 messageService.executeHistoryCommand(chatId);
-                // Остаемся в MAIN_MENU
                 break;
             case "🔄 Сменить пользователя":
                 stateManager.setUserState(chatId, "SWITCH_USER");
@@ -89,17 +87,18 @@ public class StateHandler {
                 break;
             case "♈ Гороскоп":
                 messageService.sendZodiacButtons(chatId);
-                // Остаемся в MAIN_MENU
+                break;
+            case "🌤️ Погода":
+                messageService.sendWeatherButtons(chatId);
                 break;
             case "ℹ️ Помощь":
-                messageService.sendHelpMessage(chatId, user);
-                // Остаемся в MAIN_MENU
+                sendHelpMessage(chatId);
                 break;
             default:
-                // Если пришло неизвестное сообщение, показываем главное меню
                 messageService.sendMainMenu(chatId, user);
         }
     }
+
 
     private void sendHelpMessage(Long chatId) {
         String helpText = "ℹ️ Помощь по боту:\n\n" +
@@ -109,6 +108,7 @@ public class StateHandler {
                 "📋 История напоминаний - просмотр последних сохраненных напоминаний\n" +
                 "🔄 Сменить пользователя - переключиться на другого пользователя\n" +
                 "♈ Гороскоп - гороскоп на сегодня\n" +
+                "🌤️ Погода - погода в разных городах\n" +
                 "ℹ️ Помощь - это сообщение\n\n" +
                 "Команды:\n" +
                 "/start - начать работу\n" +

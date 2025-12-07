@@ -23,6 +23,20 @@ public class CallbackHandler {
         Long chatId = callbackQuery.getMessage().getChatId();
         String data = callbackQuery.getData();
         String state = stateManager.getUserState(chatId);
+        if (data.startsWith("weather_")) {
+            String city = null;
+            if (data.equals("weather_ekaterinburg")) {
+                city = "Ekaterinburg";
+            } else if (data.equals("weather_moscow")) {
+                city = "Moscow";
+            } else if (data.equals("weather_kostanay")) {
+                city = "Kostanay,KZ";
+            }
+            if (city != null) {
+                messageService.sendWeather(chatId, city);
+            }
+            return;
+        }
 
         if (data.startsWith("horoscope_")) {
             String zodiacSign = data.substring("horoscope_".length());
