@@ -45,6 +45,7 @@ public class UserManager {
     public void updateUserName(User user, String oldName, String newName) {
         usersByName.remove(oldName.toLowerCase());
         usersByName.put(newName.toLowerCase(), user);
+        user.setName(newName);
     }
 
     public String getAvailableUsersList() {

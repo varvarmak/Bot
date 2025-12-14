@@ -5,22 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b974d9-7862-47ca-a041-1751045c4f3f" name="Changes" comment="мама мама мама">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DataBaseManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/UserData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/UserHistoryCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_11_2025_18_42_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_11_2025_18_42__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/StateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/bot/handlers/StateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/models/Month.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/models/Month.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/MessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/CommandHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/StateHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/bot/handlers/StateHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/models/Month.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/models/Month.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/services/MessageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/services/MessageService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/services/UserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/services/UserManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/bot.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/simple-bot-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.DayTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.EventTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.IntegrationScenarioTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.MonthTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.UserTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.DayTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.EventTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.IntegrationScenarioTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.MonthTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.UserTest.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +80,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/polinamasolova/Desktop/BOT/src/main/java/org/example",
+    "last_opened_file_path": "/Users/polinamasolova/Desktop/BOT!",
     "onboarding.tips.debug.path": "C:/Users/Varvara/Desktop/oop/Bot/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",

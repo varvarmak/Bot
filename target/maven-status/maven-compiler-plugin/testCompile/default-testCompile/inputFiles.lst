@@ -1,5 +1,11 @@
-C:\Users\Varvara\Desktop\oop\Bot\src\test\java\org\example\DayTest.java
-C:\Users\Varvara\Desktop\oop\Bot\src\test\java\org\example\EventTest.java
-C:\Users\Varvara\Desktop\oop\Bot\src\test\java\org\example\IntegrationScenarioTest.java
-C:\Users\Varvara\Desktop\oop\Bot\src\test\java\org\example\MonthTest.java
-C:\Users\Varvara\Desktop\oop\Bot\src\test\java\org\example\UserTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/models/DayTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/services/UserStateManagerTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/services/HoroscopeServiceTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/models/UserTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/models/YearTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/services/UserManagerTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/services/WeatherServiceTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/utils/UserNameExtractorTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/models/MonthTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/utils/DateTimeUtilsTest.java
+/Users/polinamasolova/Desktop/BOT!/src/test/java/org/example/models/EventTest.java

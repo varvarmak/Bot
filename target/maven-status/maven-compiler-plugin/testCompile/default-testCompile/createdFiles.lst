@@ -1,6 +1,11 @@
-org\example\EventTest.class
-org\example\IntegrationScenarioTest$1.class
-org\example\IntegrationScenarioTest.class
-org\example\DayTest.class
-org\example\UserTest.class
-org\example\MonthTest.class
+org/example/models/DayTest.class
+org/example/utils/UserNameExtractorTest.class
+org/example/models/MonthTest.class
+org/example/models/YearTest.class
+org/example/models/EventTest.class
+org/example/services/HoroscopeServiceTest.class
+org/example/utils/DateTimeUtilsTest.class
+org/example/services/WeatherServiceTest.class
+org/example/services/UserStateManagerTest.class
+org/example/models/UserTest.class
+org/example/services/UserManagerTest.class
